@@ -1,0 +1,69 @@
+swagger: "2.0"
+info:
+  description: "This is a sample swagger doc for Wishgift"
+  version: "0.0.1"
+  title: "Distributable Swagger Doc"
+host: "localhost:8080"
+basePath: "/api/v1"
+paths:
+  /login:
+    post:
+      tags:
+      - "Users"
+      summary: "Admin Login"
+      operationId: "login"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/AdminLoginParams"
+      responses:
+        200:
+          description: "Successfully Login"
+          schema:
+            type: "object"
+            properties:
+              data:
+                $ref: "#/definitions/AdminLoginResp"
+              message:
+                type: "string"
+        400:
+          description: "Invalid Input"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "integer"
+                description: "The http status code"
+              code:
+                type: "integer"
+                description: "The error code"
+              message:
+                type: "string"
+                description: "The message associated to the error code"
+      x-swagger-router-controller: "login"
+definitions:
+  AdminLoginParams:
+    type: "object"
+    description: "Admin Login object"
+    properties:
+      email:
+        type: "string"
+        description: |
+          "Email for admin user"
+      password:
+        type: "string"
+        description: "Password for admin user"
+  AdminLoginResp:
+    type: "object"
+    description: "Security Token for logged in Admin"
+    properties:
+      token:
+        type: "string"
+        description: |
+          "Admin User Token"
