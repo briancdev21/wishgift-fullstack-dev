@@ -7,6 +7,7 @@ const jsonRefs = require('json-refs');
 const path = require('path');
 const swaggerui = require('swagger-ui-express');
 const yaml = require('js-yaml');
+const cors = require('cors');
 
 const logger = require('../lib/logger');
 
@@ -22,6 +23,7 @@ module.exports = (app, done) => {
     });
 
   initializeSwagger(swaggerObject, (swaggerMiddleware) => {
+    app.use(cors());
     app.use(swaggerMiddleware.swaggerMetadata());
     app.use(swaggerMiddleware.swaggerValidator());
     app.use(swaggerMiddleware.swaggerRouter({

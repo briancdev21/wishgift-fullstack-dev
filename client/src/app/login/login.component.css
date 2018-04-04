@@ -1,0 +1,35 @@
+.login.container {
+  min-height: 100vh;
+  background-color: #f1f3f4;
+}
+
+.loginbox {
+  max-width: 600px;
+  width: 100%;
+  margin-top: 150px;
+}
+
+.loginbox * {
+  width: 100%;
+}
+
+.loginbox h1 {
+  font-size: 2.5rem;
+}
+
+.mat-form-field {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.mat-icon {
+  cursor: pointer;
+}
+
+.login-btn {
+  margin: 30px 0 10px;
+  font-size: 1.2rem;
+  font-size: 1.2rem;
+  padding: 0.4rem;
+  letter-spacing: 1px;
+}

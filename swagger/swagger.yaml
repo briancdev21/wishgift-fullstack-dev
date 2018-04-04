@@ -7,6 +7,8 @@ host: "localhost:8080"
 basePath: "/api/v1"
 paths:
   /login:
+    x-swagger-router-controller: "login"
+    x-swagger-router-handle-subpaths: true
     post:
       tags:
       - "Users"
@@ -46,7 +48,6 @@ paths:
               message:
                 type: "string"
                 description: "The message associated to the error code"
-      x-swagger-router-controller: "login"
 definitions:
   AdminLoginParams:
     type: "object"
