@@ -9,12 +9,15 @@ import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './angular-routing.module';
+import { AdminComponent } from './admin/admin.component';
+import { ComponentsModule } from './components/components.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import { AppRoutingModule } from './angular-routing.module';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ComponentsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

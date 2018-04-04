@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators, NgForm, FormGroup, FormBuilder} from '@angular/forms';
+import {Router} from '@angular/router';
+
 import { LoginService } from '../service/login.service';
+
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,7 @@ import { LoginService } from '../service/login.service';
 })
 export class LoginComponent implements OnInit {
   loginform: FormGroup;
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService) {
+  constructor(private formBuilder: FormBuilder, private loginService: LoginService, private router: Router) {
     
    }
 
@@ -25,6 +28,8 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginform.get('email'), this.loginform.get('password')).subscribe(res => {
       if (res.status) {
         localStorage.setItem('token', res.data);
+        this.router.navigate(['/admin']);
+
       } else {
         window.alert('Login Failed');
       }
