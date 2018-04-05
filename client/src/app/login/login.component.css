@@ -1,6 +1,7 @@
 .login.container {
   min-height: 100vh;
   background-color: #f1f3f4;
+  width: 100%;
 }
 
 .loginbox {

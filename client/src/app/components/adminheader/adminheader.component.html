@@ -1,0 +1,18 @@
+<div class="top-bar">
+  <div class="menu-left col-sm-4 col-lg-4 col-md-4">
+    <a routerLink="/login" ><img src="assets/logo.png" /></a>
+  </div>
+  <div class="menu-center col-sm-4 col-lg-4 col-md-4" >
+    <a [routerLink]="['/admin']" [routerLinkActive]="['active']"> <span>ADMIN</span></a>
+    <a [routerLink]="['/tags']" [routerLinkActive]="['active']"> <span>TAGS</span></a>
+  </div>
+  <div class="menu-right col-sm-4 col-lg-4 col-md-4 clearfix">
+    <!--This Open up profile-opened section-->
+    <div  (click)="openProfile($event)"  class="user-profile pull-right">
+      <a >
+        <span></span>
+        <img src="{{!mProfileOpened ? 'assets/down-arrow.svg' : 'assets/up-arrow.svg'}}" class="arrow-btn" />
+      </a>
+    </div>
+  </div>
+</div>

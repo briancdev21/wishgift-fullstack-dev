@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-adminheader',
@@ -6,10 +6,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./adminheader.component.css']
 })
 export class AdminheaderComponent implements OnInit {
+  private mRotateMenu: boolean = true;
+  private mProfileOpened: boolean = false;
+  private mAlertOpened: boolean = false;
+  private mNotificationOpened: boolean = false;
 
-  constructor() { }
+  @HostListener('window:click', ['$event'])
 
   ngOnInit() {
+
+  }
+
+  openProfile(event: any): void {
+    console.log('event fire');
+    this.mProfileOpened = !this.mProfileOpened;
+    event.stopPropagation();
   }
 
 }
