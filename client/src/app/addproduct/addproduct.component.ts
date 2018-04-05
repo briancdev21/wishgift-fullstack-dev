@@ -27,12 +27,10 @@ export class AddproductComponent implements OnInit {
     }
     this.Upload.upload({
       url: `${environment.server}/upload`,
-      headers: new HttpHeaders().set('Authorization', 'some-token'), //Option
-      params: new HttpParams().set('test', '123'), //Option
       fields: { //Option
-        toUrl: 'device'
+        filename: file.name
       },
-      filesKey: 'MMSUploadFile', //Option
+      filesKey: 'upfile', //Option
       files: file,
       process: true
     }).subscribe(

@@ -7,9 +7,9 @@ const Promise = require('bluebird');
 
 module.exports = {
   'upload': (req, res) => {
-    logger.info('upload file');
-    return Promise.attempt(() => uploadService
-      .upload(req.body))
+    logger.info('uploading file');
+    return Promise.try(() => uploadService
+      .upload(req))
       .then((output) =>
           res.status(200).send(simpleRes(true, 'File Upload Success', output))
       )

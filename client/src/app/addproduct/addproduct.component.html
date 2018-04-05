@@ -5,6 +5,7 @@
      [ngxf-validate]="{ size: { min: 5000, max:1000000 } }">
   <label class="upload-button">
     <input type="file"
+      name="upfile"
           (ngxf-select)="uploadFile($event)"
           [ngxf-validate]="{ size: { min: 5000, max:1000000 } }"
           accept="image/*,.svg,.ttt" >
