@@ -3,8 +3,8 @@
     <a routerLink="/login" ><img src="assets/logo.png" /></a>
   </div>
   <div class="menu-center col-sm-4 col-lg-4 col-md-4" >
-    <a [routerLink]="['/admin']" [routerLinkActive]="['active']"> <span>ADMIN</span></a>
-    <a [routerLink]="['/tags']" [routerLinkActive]="['active']"> <span>TAGS</span></a>
+    <a [routerLink]="['/admin']" [routerLinkActive]="['active']" [ngClass]="{'active': adminActive}" > <span>ADMIN</span></a>
+    <a [routerLink]="['/tags']" [routerLinkActive]="['active']" [ngClass]="{'active': tagsActive}" > <span>TAGS</span></a>
   </div>
   <div class="menu-right col-sm-4 col-lg-4 col-md-4 clearfix">
     <!--This Open up profile-opened section-->

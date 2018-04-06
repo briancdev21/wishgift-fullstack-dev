@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-adminheader',
@@ -11,10 +11,12 @@ export class AdminheaderComponent implements OnInit {
   private mAlertOpened: boolean = false;
   private mNotificationOpened: boolean = false;
 
-  @HostListener('window:click', ['$event'])
+  // @HostListener('window:click', ['$event'])
+  @Input() adminActive: Boolean;
+  @Input() tagsActive: Boolean;
 
   ngOnInit() {
-
+    
   }
 
   openProfile(event: any): void {

@@ -1,0 +1,136 @@
+div, span {
+  color: #757575;
+}
+
+.nav-section {
+  margin-top: 70px;
+  font-size: 20px;
+  padding: 35px 0;
+}
+
+.nav-section span {
+  font-weight: bold;
+  color: #777;
+}
+
+.clicks-track-section {
+  display: flex;
+  padding: 5px 0;
+}
+
+.clicks-track-section div.item {
+  flex: 1;
+  margin: 5px;
+  background: #ffffff;
+  box-shadow: #eee 1px 1px 3px 1px;
+  border-radius: 2px;
+  padding: 15px;
+  display: flex;
+}
+
+.clicks-track-section div.item img {
+  width: 54px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.clicks-track-section div.numbers div:first-child{
+  font-size: 35px;
+  font-weight: 500;
+  color: #777;
+}
+
+.clicks-track-section div.numbers div:last-child{
+  font-size: 15px;
+}
+
+.new-product-form {
+  margin: 10px 5px;
+  background: white;
+  box-shadow: #eee 1px 1px 3px 1px;
+  padding: 20px 30px;
+}
+
+.new-product-form .main {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.new-product-form .main .image-upload {
+  flex: 2;
+  border: 1px dotted lightgray;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.new-product-form .main .image-upload .block {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-product-form .main .product-details {
+  flex: 3;
+  padding-left: 40px;
+}
+
+.new-product-form .btns {
+  padding: 20px;
+  text-align: center;
+}
+.new-product-form .btns button {
+  padding: 8px;
+  width: 150px;
+  border: 1px solid lightgray;
+  margin: 0 10px;
+  color: #777;
+}
+
+.new-product-form .btns button:hover {
+  background: black;
+  color: white;
+}
+
+
+.head {
+  border-bottom: 1px solid lightgray;
+}
+
+
+.body table {
+  width: 100%;
+}
+.body table td {
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+.body table td input {
+  padding: 6px;
+  border: solid transparent 2px;
+  border-radius: 3px;
+  width: 70%;
+  outline: none;
+}
+
+.body table td input:hover {
+  border: solid royalblue 2px;
+}
+
+table .head .id {
+  font-size: 20px;
+  font-weight: 600;
+  padding-left: 0;
+  width: 120px;
+  padding: 15px 0;
+}
+
+table .head .date {
+  font-size: 12px;
+  color: lightgray;
+}

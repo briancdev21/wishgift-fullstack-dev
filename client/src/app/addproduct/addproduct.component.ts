@@ -8,13 +8,12 @@ import { environment } from '../../environments/environment';
   selector: 'app-addproduct',
   templateUrl: './addproduct.component.html',
   styleUrls: ['./addproduct.component.css']
-})
+})  
 export class AddproductComponent implements OnInit {
   process: number[] = [];
   fileData: File;
 
   constructor(private Upload: NgxfUploaderService) { }
-
 
   ngOnInit() {
   }
