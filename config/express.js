@@ -32,11 +32,12 @@ module.exports = (app, cb) => {
 
   // Error Response
   app.use((err, req, res, next) => {
-    res.locals.message = err.message;
-    res.locals.error = err || {};
-    res.statusCode = err.status || 500;
-    res.status(res.statusCode).send('error:', err);
-    next();
+    console.log(err);
+    // res.locals.message = err.message;
+    // res.locals.error = err || {};
+    // res.statusCode = err.status || 500;
+    // res.status(res.statusCode).send('error:', err);
+    // next();
   });
 
    cb();

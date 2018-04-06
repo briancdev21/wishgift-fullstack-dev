@@ -48,6 +48,40 @@ paths:
               message:
                 type: "string"
                 description: "The message associated to the error code"
+  /upload:
+    post:
+      summary: Uploads a file.
+      operationId: "upload"
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: upfile
+          type: file
+          description: The file to upload.
+      responses:
+        200:
+          description: "File Upload Success"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        400:
+          description: "Invalid Input"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "integer"
+                description: "The http status code"
+              code:
+                type: "integer"
+                description: "The error code"
+              message:
+                type: "string"
+                description: "The message associated to the error code"
+    x-swagger-router-controller: "fileUpload"
 definitions:
   AdminLoginParams:
     type: "object"

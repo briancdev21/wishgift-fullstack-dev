@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import {AuthGuard} from './service/auth-guard.service';
+import { AddproductComponent } from './addproduct/addproduct.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +16,11 @@ const routes: Routes = [
   {
     path: 'tags',
     component: AdminComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'addproduct',
+    component: AddproductComponent,
     canActivate: [AuthGuard]
   }
 ];
