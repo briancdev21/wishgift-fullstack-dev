@@ -1,0 +1,65 @@
+.dollar{
+  display:inline-block;
+  position: relative;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 37px;
+  font-size: 14px;
+  color: royalblue;
+}
+
+.dollar input{
+  padding: 6px;
+  padding-left: 1.5em;
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  height: 37px;
+  outline: none;
+  color: royalblue;
+}
+
+.dollar input:hover {
+  border: solid royalblue 2px;
+}
+
+.dollar .value-display {
+position: absolute;
+top: 0;
+left:0;
+padding-left: 1.5em;
+display: flex;
+align-items: center;
+width: 100%;
+height: 100%;
+font-size: 14px;
+}
+.dollar:before {
+position: absolute;
+top: 0;
+content: "$";
+left: calc(5px);
+display: flex;
+align-items: center;
+height: 100%;
+font-size: 14px;
+z-index: 5;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+ color: #d3d3d3;
+}
+::-moz-placeholder { /* Firefox 19+ */
+ color: #d3d3d3;
+}
+:-ms-input-placeholder { /* IE 10+ */
+ color: #d3d3d3;
+}
+:-moz-placeholder { /* Firefox 18- */
+ color: #d3d3d3;
+}

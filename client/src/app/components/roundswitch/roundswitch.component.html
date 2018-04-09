@@ -1,0 +1,4 @@
+<label class="switch">
+  <input type="checkbox" (change)="changeText()" [checked] ="on" >
+  <span class="slider round" [ngClass]="{'on': on, 'off': !on}" >{{status}}</span>
+</label>

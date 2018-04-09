@@ -1,0 +1,4 @@
+<div class="switch" >
+  <div class="item left" [ngClass]="{'active': isMale}" (click)="changeSwitch('male')" >Male</div>
+  <div class="item right" [ngClass]="{'active': !isMale}" (click)="changeSwitch('female')" >Female</div>
+</div>

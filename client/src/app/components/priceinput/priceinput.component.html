@@ -1,0 +1,4 @@
+<div class="dollar">
+  <input *ngIf="unitpriceEditable" (blur)="unitpriceEditable = false;" type="number" class="unitprice" step="0.01" min="0.00" placeholder="0.00" [(ngModel)]="unitprice" (ngModelChange)="changeValue()"/>
+  <div class="value-display" *ngIf="!unitpriceEditable" placeholder="0.00" (click)="unitpriceEditable = true;" >{{ unitprice | number:'1.2-2' }}</div>
+</div>
