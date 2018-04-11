@@ -15,20 +15,26 @@ module.exports = {
     }
     const sampleFile = req.files.upfile[0];
     const buffer = sampleFile.buffer;
-    const newPath = `uploads/${sampleFile.originalname}`;
-    return fs.open(newPath, 'w', function(err, fd) {
+    const dateStr = new Date().toISOString();
+    const fileName = `image-${dateStr}.jpg`;
+    const newPath = `uploads/${fileName}`;
+    return new Promise((resolve, reject) => {
+      fs.open(newPath, 'w', function(err, fd) {
       if (err) {
-        return Promise.reject(new exceptions.InvalidInputError(err));
+        return reject(new exceptions.InvalidInputError(err));
       }
   
       fs.write(fd, buffer, 0, buffer.length, null, function(err) {
           if (err) {
-             return Promise.reject(new exceptions.InvalidInputError('error writing file: ' + err));
+             return reject(new exceptions.InvalidInputError('error writing file: ' + err));
           }
           fs.close(fd, function() {
               logger.info('file written');
+              const data = {'filename': fileName};
+              return resolve(data);
           })
       });
     });
+  });
   }
 };

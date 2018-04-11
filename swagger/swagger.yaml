@@ -84,6 +84,212 @@ paths:
                       type: "string"
                       description: "The message associated to the error code"
     x-swagger-router-controller: "fileUpload"
+  /products:
+    get:
+      tags:
+      - "Products"
+      summary: "Get all products"
+      operationId: "getProducts"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "fields"
+        in: "query"
+        description: "Limit the fields to be returned"
+        type: "array"
+        uniqueItems: true
+        items:
+          type: "string"
+        default:
+          - '*'
+      - name: "limit"
+        in: "query"
+        description: "Limit the number of returned results"
+        type: "integer"
+        format: "int32"
+        default: 50
+        minimum: 1
+      - name: "offset"
+        in: "query"
+        description: "Offset the number of returned result from an index of 0"
+        type: "integer"
+        format: "int64"
+        default: 0
+        minimum: 0
+      responses:
+        200:
+          description: "Successfully Retrieved Products"
+          schema:
+            type: "object"
+            properties:
+              results:
+                type: "array"
+                items:
+                  $ref: "#/definitions/Product"
+              message:
+                type: "string"
+                description: |
+                  "If empty result, it shall state 'No results were found'. If results found,
+                  it shall state 'Found X result(s)"
+              total:
+                type: "integer"
+                description: "The actual number of contacts found"
+              offset:
+                type: "integer"
+                description: "The returned offset from an index of 0"
+              limit:
+                type: "integer"
+                description: "Limit of the number of results returned"
+        400:
+          description: "Invalid Input"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "integer"
+                description: "The http status code"
+              code:
+                type: "integer"
+                description: "The error code"
+              message:
+                type: "string"
+                description: "The message associated to the error code"
+      x-swagger-router-controller: "products"
+    post:
+      tags:
+      - "Products"
+      summary: "Create a product"
+      operationId: "createProduct"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Product object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/ProductCreate"
+      responses:
+        201:
+          description: "Successfully Created Product"
+          schema:
+            type: "object"
+            properties:
+              data:
+                $ref: "#/definitions/Product"
+              message:
+                type: "string"
+        400:
+          description: "Invalid Input"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "integer"
+                description: "The http status code"
+              code:
+                type: "integer"
+                description: "The error code"
+              message:
+                type: "string"
+                description: "The message associated to the error code"
+      x-swagger-router-controller: "products"
+  /products/{productId}:
+    parameters:
+    - name: "productId"
+      in: "path"
+      required: true
+      type: "string"
+      description: "The ID of the Product"
+    get:
+      tags:
+      - "Products"
+      summary: "Retrieve a product"
+      operationId: "getProduct"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "field"
+        in: "query"
+        description: "Limit the fields to be returned"
+        type: "array"
+        uniqueItems: true
+        items:
+          type: "string"
+        default:
+          - '*'
+      responses:
+        200:
+          description: "Successfully Retrieved Product"
+          schema:
+            type: "object"
+            properties:
+              data:
+                $ref: "#/definitions/Product"
+              message:
+                type: "string"
+        400:
+          description: "Invalid Input"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "integer"
+                description: "The http status code"
+              code:
+                type: "integer"
+                description: "The error code"
+              message:
+                type: "string"
+                description: "The message associated to the error code"
+        404:
+          description: "Product not found"
+      x-swagger-router-controller: "products"
+    put:
+      tags:
+      - "Products"
+      summary: "Modify a product"
+      operationId: "modifyProduct"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "Product object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/ProductModify"
+      responses:
+        200:
+          description: "Successfully Modified Product"
+          schema:
+            type: "object"
+            properties:
+              data:
+                $ref: "#/definitions/Product"
+              message:
+                type: "string"
+        400:
+          description: "Invalid Input"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "integer"
+                description: "The http status code"
+              code:
+                type: "integer"
+                description: "The error code"
+              message:
+                type: "string"
+                description: "The message associated to the error code"
+        404:
+          description: "Product not found"
+      x-swagger-router-controller: "products"
 definitions:
   AdminLoginParams:
     type: "object"
@@ -104,3 +310,180 @@ definitions:
         type: "string"
         description: |
           "Admin User Token"
+  Product:
+    type: "object"
+    description: "Product object"
+    properties:
+      id:
+        type: "string"
+        description: |
+          "The id of the Product"
+      name:
+        type: "string"
+        description: "The name of Product"
+      createdDate:
+        type: "string"
+        format: "date"
+        description: "The create date of the the product"
+      visibility:
+        type: "boolean"
+        description: "A bool value for product visibility"
+      gender:
+        type: "string"
+        description: "The gender status of the product"
+        enum:
+        - "MALE"
+        - "FEMALE"
+      url:
+        type: "string"
+        description: |
+          "Product URL"
+      productImage:
+        type: "string"
+        description: |
+          "Product Image name"
+      tags:
+        type: "array"
+        description: "The users that are assigned to the proposal"
+        items:
+          type: "string"
+      relationships:
+        type: "array"
+        description: "The users that are assigned to the proposal"
+        items:
+          type: "string"
+      ages:
+        type: "string"
+        description: "The ages range of the product"
+      price:
+        type: 'number'
+        format: 'double'
+        description: "The price value of the product"
+      clicks:
+        type: "integer"
+        description: "The number of clicks for product"
+      twitterShares:
+        type: "integer"
+        description: "The number of Twitter Shares for product"
+      facebookShares:
+        type: "integer"
+        description: "The number of Facebook Shares for product"
+      pinterestShares:
+        type: "integer"
+        description: "The number of Pinterest Shares for product"
+  ProductCreate:
+    type: "object"
+    description: "The model to create a product object"
+    properties:
+      name:
+        type: "string"
+        description: "The name of Product"
+      createdDate:
+        type: "string"
+        format: "date"
+        description: "The create date of the the product"
+      visibility:
+        type: "boolean"
+        description: "A bool value for product visibility"
+      gender:
+        type: "string"
+        description: "The gender status of the product"
+        enum:
+        - "MALE"
+        - "FEMALE"
+      url:
+        type: "string"
+        description: |
+          "Product URL"
+      productImage:
+        type: "string"
+        description: |
+          "Product Image name"
+      tags:
+        type: "array"
+        description: "The users that are assigned to the proposal"
+        items:
+          type: "string"
+      relationships:
+        type: "array"
+        description: "The users that are assigned to the proposal"
+        items:
+          type: "string"
+      ages:
+        type: "string"
+        description: "The ages range of the product"
+      price:
+        type: 'number'
+        format: 'double'
+        description: "The price value of the product"
+      clicks:
+        type: "integer"
+        description: "The number of clicks for product"
+      twitterShares:
+        type: "integer"
+        description: "The number of Twitter Shares for product"
+      facebookShares:
+        type: "integer"
+        description: "The number of Facebook Shares for product"
+      pinterestShares:
+        type: "integer"
+        description: "The number of Pinterest Shares for product"
+  ProductModify:
+    type: "object"
+    description: "The model to create a product object"
+    required:
+    - "name"
+    - "url"
+    - "price"
+    - "tags"
+    - "relationships"
+    properties:
+      name:
+        type: "string"
+        description: "The name of Product"
+      visibility:
+        type: "boolean"
+        description: "A bool value for product visibility"
+      gender:
+        type: "string"
+        description: "The gender status of the product"
+        enum:
+        - "MALE"
+        - "FEMALE"
+      url:
+        type: "string"
+        description: |
+          "Product URL"
+      productImage:
+        type: "string"
+        description: |
+          "Product Image name"
+      tags:
+        type: "array"
+        description: "The users that are assigned to the proposal"
+        items:
+          type: "string"
+      relationships:
+        type: "array"
+        description: "The users that are assigned to the proposal"
+        items:
+          type: "string"
+      ages:
+        type: "string"
+        description: "The ages range of the product"
+      price:
+        type: 'number'
+        format: 'double'
+        description: "The price value of the product"
+      clicks:
+        type: "integer"
+        description: "The number of clicks for product"
+      twitterShares:
+        type: "integer"
+        description: "The number of Twitter Shares for product"
+      facebookShares:
+        type: "integer"
+        description: "The number of Facebook Shares for product"
+      pinterestShares:
+        type: "integer"
+        description: "The number of Pinterest Shares for product"
