@@ -11,7 +11,7 @@ import { TagsComponent } from './tags/tags.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'admin', pathMatch: 'full' },
   {
     path: 'admin',
     component: AdminComponent,

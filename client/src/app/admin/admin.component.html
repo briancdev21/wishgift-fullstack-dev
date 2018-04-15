@@ -23,10 +23,10 @@
         <tr *ngFor="let product of productsOfPage" >
           <td width="100px" ><div class="photo" ><img src="{{serverUrl}}/images/{{product.productImage}}" /></div></td>
           <td width="80px"><a class="id" routerLink="../products/{{product.id}}" >{{ product.id | formatId }}</a></td>
-          <td><div class="name" >{{ product.name }}</div></td>
+          <td><div class="name" width="350px" >{{ product.name }}</div></td>
           <td><div class="tag" >{{ product.tags }}</div></td>
           <td><div class="relationship" >{{ product.relationships }}</div></td>
-          <td><div class="price" >${{ product.price | number:'1.2-2' }}</div></td>
+          <td><div class="price" width="100px" >${{ product.price | number:'1.2-2' }}</div></td>
           <td width="100px"><div class="actions" ><span class="edit-btn" routerLink="../products/{{product.id}}"  ><img src="assets/pencil-alt.svg" /></span>
             <span class="remove-btn" (click)="removeProduct(product.id)" ><img src="assets/trash-alt.svg" /></span></div></td>
         </tr>
