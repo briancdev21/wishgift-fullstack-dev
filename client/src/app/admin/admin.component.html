@@ -1,3 +1,41 @@
 <app-adminheader></app-adminheader>
 <div class="container">
+  <div class="row header">
+    <div class="nav-section">Products List</div>
+    <a class="addItemBtn" routerLink="/addproduct">+ Add Item</a>
+    <div class="searchbyname"><input type="text" [(ngModel)]="searchname" (ngModelChange)="searchNameChanged()" /></div>
+    <span>{{countOfPageProducts > products.length ? products.length : countOfPageProducts }} of {{products.length}}</span>
+    <app-cus-dropdown [title]="'Show'"  [labels]="countByLabels" [options]="countByOptions" (selected)="countByChanged($event)" ></app-cus-dropdown>
+    <app-cus-dropdown [title]="'Sort by'" class="sortbyCmp" [labels]="sortByLabels" [options]="sortByOptions" (selected)="sortByChanged($event)" ></app-cus-dropdown>
+  </div>
+  <div class="main" >
+    <div id="product-table" >
+      <table>
+        <tr>
+          <th>Photo</th>
+          <th>ID<img src="assets/sort.svg" class="sort-icon" (click)="changeSortRule('id')" /></th>
+          <th>Name<img src="assets/sort.svg" class="sort-icon" (click)="changeSortRule('name')" /></th>
+          <th>Tag</th>
+          <th>Relationship</th>
+          <th>Price<img src="assets/sort.svg" class="sort-icon" (click)="changeSortRule('price')" /></th>
+          <th>Actions</th>
+        </tr>
+        <tr *ngFor="let product of productsOfPage" >
+          <td width="100px" ><div class="photo" ><img src="{{serverUrl}}/images/{{product.productImage}}" /></div></td>
+          <td width="80px"><a class="id" routerLink="../products/{{product.id}}" >{{ product.id | formatId }}</a></td>
+          <td><div class="name" >{{ product.name }}</div></td>
+          <td><div class="tag" >{{ product.tags }}</div></td>
+          <td><div class="relationship" >{{ product.relationships }}</div></td>
+          <td><div class="price" >${{ product.price | number:'1.2-2' }}</div></td>
+          <td width="100px"><div class="actions" ><span class="edit-btn" routerLink="../products/{{product.id}}"  ><img src="assets/pencil-alt.svg" /></span>
+            <span class="remove-btn" (click)="removeProduct(product.id)" ><img src="assets/trash-alt.svg" /></span></div></td>
+        </tr>
+      </table>
+    </div>
+    <ngx-paginate
+      [page]="page"
+      [options]="page_options"
+      (pageChange)='pageChange($event)'>
+    </ngx-paginate>
+  </div>
 </div>

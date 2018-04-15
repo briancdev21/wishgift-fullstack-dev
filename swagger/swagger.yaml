@@ -290,6 +290,33 @@ paths:
         404:
           description: "Product not found"
       x-swagger-router-controller: "products"
+    delete:
+      tags:
+      - "Products"
+      summary: "Delete a product"
+      operationId: "deleteProduct"
+      responses:
+        204:
+          description: "Successfully Deleted Product"
+        400:
+          description: "Could not delete"
+          schema:
+            type: "object"
+            properties:
+              status:
+                type: "integer"
+                description: "The http status code"
+              code:
+                type: "integer"
+                description: "The error code"
+              errors:
+                type: "array"
+                description: "The errors generated from the request"
+                items:
+                  type: "string"
+        404:
+          description: "Product not found"
+      x-swagger-router-controller: "products"
 definitions:
   AdminLoginParams:
     type: "object"
@@ -323,7 +350,7 @@ definitions:
         description: "The name of Product"
       createdDate:
         type: "string"
-        format: "date"
+        format: "date-time"
         description: "The create date of the the product"
       visibility:
         type: "boolean"
@@ -380,7 +407,7 @@ definitions:
         description: "The name of Product"
       createdDate:
         type: "string"
-        format: "date"
+        format: "date-time"
         description: "The create date of the the product"
       visibility:
         type: "boolean"

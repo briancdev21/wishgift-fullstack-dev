@@ -1,0 +1,11 @@
+2018-04-14 15:42:51.585 EST [1808] LOG:  listening on IPv6 address "::1", port 5432
+2018-04-14 15:42:51.585 EST [1808] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2018-04-14 15:42:51.586 EST [1808] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2018-04-14 15:42:51.602 EST [1809] LOG:  database system was shut down at 2018-04-14 15:42:46 EST
+2018-04-14 15:42:51.608 EST [1808] LOG:  database system is ready to accept connections
+2018-04-14 15:43:08.210 EST [1829] FATAL:  role "user" does not exist
+2018-04-14 15:43:23.078 EST [1830] FATAL:  role "user" does not exist
+2018-04-14 15:43:37.502 EST [1831] FATAL:  role "user" does not exist
+2018-04-14 15:43:55.985 EST [1834] FATAL:  role "user" does not exist
+2018-04-14 15:44:26.877 EST [1835] FATAL:  role "user" does not exist
+2018-04-14 15:44:40.909 EST [1836] FATAL:  role "user" does not exist

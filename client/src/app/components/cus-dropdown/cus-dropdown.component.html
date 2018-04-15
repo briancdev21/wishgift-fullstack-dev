@@ -1,0 +1,6 @@
+<div class="container" >
+  <span class="title" >{{title}}:</span>
+  <select class="options" (change)="selectionChanged($event)" > 
+    <option *ngFor="let opt of options; let i = index;" [ngValue]="opt" >{{labels[i]}}</option>
+  </select> 
+</div>

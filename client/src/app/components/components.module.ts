@@ -7,6 +7,7 @@ import { RectswitchComponent } from './rectswitch/rectswitch.component';
 import { RoundswitchComponent } from './roundswitch/roundswitch.component';
 import { PriceinputComponent } from './priceinput/priceinput.component';
 import { MultitagsComponent } from './multitags/multitags.component';
+import { CusDropdownComponent } from './cus-dropdown/cus-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { MultitagsComponent } from './multitags/multitags.component';
     RectswitchComponent,
     RoundswitchComponent,
     PriceinputComponent,
-    MultitagsComponent
+    MultitagsComponent,
+    CusDropdownComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { MultitagsComponent } from './multitags/multitags.component';
     RectswitchComponent,
     RoundswitchComponent,
     PriceinputComponent,
-    MultitagsComponent
+    MultitagsComponent,
+    CusDropdownComponent
   ],
   schemas: [ NO_ERRORS_SCHEMA ]
 })

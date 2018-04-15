@@ -31,6 +31,11 @@ module.exports = (app, done) => {
       'useStubs'   : false // Do not use mock stubs
     }));
 
+    app.get('/images/:imageName', (req, res) => {
+      console.log('params:', req.params);
+      res.sendFile(path.resolve(path.resolve(__dirname, '../uploads', req.params.imageName)));
+    });
+
     if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
       jsonRefs.resolveRefs(swaggerObject, {
         'filter'       : ['relative'],

@@ -5,6 +5,7 @@ import { NgxfUploaderService, UploadEvent, UploadStatus, FileError } from 'ngxf-
 import { environment } from '../../environments/environment';
 import { ProductModel } from '../models/product.model';
 import { ProductService } from '../service/product.service';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-addproduct',
@@ -18,10 +19,10 @@ export class AddproductComponent implements OnInit {
 
   apiData = new ProductModel();
 
-  constructor(private Upload: NgxfUploaderService, private productService: ProductService) { }
+  constructor(private Upload: NgxfUploaderService, private productService: ProductService, private router: Router) { }
 
   ngOnInit() {
-    this.apiData.createdDate = new Date().toISOString().slice(0, 10);;
+    this.apiData.createdDate = new Date().toISOString();
   }
   
    // non-multiple, return File
@@ -33,7 +34,6 @@ export class AddproductComponent implements OnInit {
     const output = document.querySelector('.image-preview img') as HTMLImageElement;
     output.src = URL.createObjectURL(file);
     this.fileData = file;
-    
   }
 
   submit() {
@@ -41,7 +41,7 @@ export class AddproductComponent implements OnInit {
     let file = this.fileData;
     let fileName = '';
     this.Upload.upload({
-      url: `${environment.server}/upload`,
+      url: `${environment.apiserver}/upload`,
       fields: { //Option
         filename: file.name
       },
@@ -62,7 +62,7 @@ export class AddproductComponent implements OnInit {
         this.apiData.productImage = fileName;
         console.log('api data', this.apiData);
         this.productService.addProduct(this.apiData).subscribe((res) => {
-          console.log('add prdocut', res);
+          this.router.navigate(['admin']);
         });
       });
   }

@@ -16,7 +16,7 @@ export class TokenResponse {
 @Injectable()
 
 export class LoginService {
-
+  basepath = 'api/v1'
   constructor(private http: HttpClient) {}
 
   login(email, password) {
@@ -25,7 +25,7 @@ export class LoginService {
       'password': password.value
     };
     let options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }), method: 'POST' };
-    return this.http.post<TokenResponse>(`${environment.server}/login`, JSON.stringify(params), options)
+    return this.http.post<TokenResponse>(`${environment.apiserver}/login`, JSON.stringify(params), options)
       .map((res) => res)
       .catch(this.handleObservableError);
   }

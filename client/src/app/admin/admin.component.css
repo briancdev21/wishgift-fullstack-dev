@@ -1,3 +1,158 @@
 .container {
   padding-top: 80px;
 }
+
+ngx-paginate ::ng-deep .page-entry {
+  color: #777;
+  background: transparent;
+}
+ngx-paginate ::ng-deep .page-entry.active {
+  color: #222;
+  background: transparent;
+}
+
+ngx-paginate ::ng-deep.next-button,
+ngx-paginate ::ng-deep.prev-button {
+  background: #d8d8d8;
+  color: #222;
+}
+
+ngx-paginate ::ng-deep .page-size-selection {
+  display: none;
+}
+ngx-paginate ::ng-deep {
+  justify-content: flex-end;
+}
+
+app-cus-dropdown {
+  display: inline-block;
+  min-width: 120px;
+}
+
+.sortbyCmp {
+  width: 250px;
+}
+
+app-cus-dropdown.sortbyCmp ::ng-deep select {
+  padding-left: 60px;
+}
+
+
+.nav-section {
+  color: #333;
+  font-size: 20px;
+  font-weight: bolder;
+  font-family: sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 0;
+}
+
+.header > * {
+  margin: 10px;
+}
+
+.header > *:first-child {
+  margin-left: 0;
+}
+
+.header > *:last-child {
+  margin-right: 0;
+}
+
+.searchbyname {
+  flex: 1;
+}
+
+.searchbyname input {
+  width: 100%;
+  display: block;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: solid 2px #d8d8d8;  
+}
+
+.addItemBtn {
+  padding: 10px 20px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  background: #35a65b;
+  color: white;
+  line-height: 1em;
+  border-radius: 3px;
+  font-size: 12px;
+  text-transform: uppercase;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+table {
+  width: 100%;
+  background: white;
+}
+
+table th {
+  border-bottom: 2px solid #f1f3f4;
+}
+
+table td, th {
+  text-align: left;
+  border-bottom: 1px solid #f1f3f4;
+  padding: 15px 10px;
+  font-weight: bold;
+}
+
+td .photo {
+  width: 80px;
+  height: 80px;
+  background: #ccc;
+  border-radius: 5px;
+}
+
+td .photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+td .id {
+  color: #8ab0ff;
+  text-decoration: none;
+  cursor: pointer;
+}
+td .actions {
+  display: flex;
+  align-items: center;
+}
+td .actions .edit-btn, .remove-btn {
+  width: 15px; 
+  height: 15px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+td .actions img {
+  width: 100%;
+  height: 100%;
+}
+
+ngx-paginate {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+img.sort-icon {
+  width: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}

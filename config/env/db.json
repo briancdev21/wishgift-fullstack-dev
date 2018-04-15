@@ -1,23 +1,23 @@
 {
     "development": {
-        "username": "root",
-        "password": "root",
-        "database": "appdb",
+        "username": "user",
+        "password": "pass",
+        "database": "worldgift",
         "config": {
             "host": "localhost",
-            "port": "3306",
-            "dialect": "mysql",
+            "port": "5432",
+            "dialect": "postgres",
             "logging": null
         }
     },
     "test": {
-        "username": "root",
-        "password": "root",
-        "database": "testappdb",
+        "username": "user",
+        "password": "pass",
+        "database": "worldgifttest",
         "config": {
-            "host": "localhost",
-            "port": "3306",
-            "dialect": "mysql",
+            "host": "postgres",
+            "port": "5432",
+            "dialect": "postgres",
             "logging": null
         }
     }

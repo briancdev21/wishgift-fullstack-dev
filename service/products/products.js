@@ -15,9 +15,32 @@ module.exports = {
   'create': (params) => {
     logger.info('Create product');
     let newProduct = {};
+
     return Promise.props({
-      'tags': Tags.findAll({'where': {'name': {[Op.or]: params.tags}}}),
-      'relationships': Relationships.findAll({'where': {'name': {[Op.or]: params.relationships}}}),
+      'tags': Tags.findAll().then((tags) => _.map(tags, (tag) => (tag.name))),
+      'relationships': Relationships.findAll().then((relationships) => _.map(relationships, (relationship) => (relationship.name))),
+    })
+    .then((results) => {
+      const tags = [];
+      _.forEach(params.tags, (tag) => {
+        if (!_.includes(results.tags, tag)) {
+          tags.push({'name': tag});
+        }
+      });
+      const relationships = [];
+      _.forEach(params.relationships, (relationship) => {
+        if (!_.includes(results.relationships, relationship)) {
+          relationships.push({'name': relationship});
+        }
+      });
+      return {
+        'tags': tags,
+        'relationships': relationships
+      };
+    })
+    .then((filteredData) => Promise.props({
+      'tags': Tags.bulkCreate(filteredData.tags),
+      'relationships': Relationships.bulkCreate(filteredData.relationships),
       'newProduct': Products.create({
         'name': params.name,
         'createdDate': params.createdDate,
@@ -32,12 +55,22 @@ module.exports = {
         'facebookShares': params.facebookShares,
         'pinterestShares': params.pinterestShares
       })
-    })
+    }))
     .then((result) => {
       newProduct = result.newProduct;
+      if (params.tags.length === 0) { params.tags = ['*']; }
+      if (params.relationships.length === 0) { params.relationships = ['*']; }
+
+      return Promise.props({
+        'tags': Tags.findAll({'where': {'name': {[Op.or]: params.tags}}}),
+        'relationships': Relationships.findAll({'where': {'name': {[Op.or]: params.relationships}}})
+      })
+    })
+    .then((result) => {
+      console.log('result tags:', result.tags);
       return Promise.all([
-        result.newProduct.setTags(result.tags),
-        result.newProduct.setRelationships(result.relationships)
+        newProduct.setTags(result.tags),
+        newProduct.setRelationships(result.relationships)
       ]);
     })
     .then(() => newProduct);
@@ -50,10 +83,10 @@ module.exports = {
     order.push(['id']);
     
     return Promise.props({
-      'count': WorkOrder.count({
+      'count': Products.count({
         'where'  : where
       }),
-      'objects': WorkOrder.findAll(
+      'objects': Products.findAll(
         {
           'where'  : where,
           'limit'  : options.limit,
@@ -73,12 +106,37 @@ module.exports = {
   'modify': (productId, params) => {
     logger.info('Modify product');
     let updateProduct = {};
-    return Products.findOne({
-      'where': {'id': productId}
+    let filteredData = {};
+    return Promise.props({
+      'tags': Tags.findAll().then((tags) => _.map(tags, (tag) => (tag.name))),
+      'relationships': Relationships.findAll().then((relationships) => _.map(relationships, (relationship) => (relationship.name)))
     })
+      .then((results) => {
+        const tags = [];
+        _.forEach(params.tags, (tag) => {
+          if (!_.includes(results.tags, tag)) {
+            tags.push({'name': tag});
+          }
+        });
+        const relationships = [];
+        _.forEach(params.relationships, (relationship) => {
+          if (!_.includes(results.relationships, relationship)) {
+            relationships.push({'name': relationship});
+          }
+        });
+        filteredData = {
+          'tags': tags,
+          'relationships': relationships
+        };
+        return filteredData;
+      })
+      .then(() => Products.findOne({
+        'where': {'id': productId}
+      }))
       .then((product) => Promise.props({
-        'tags': Tags.findAll({'where': {'name': {[Op.or]: params.tags}}}),
-        'relationships': Relationships.findAll({'where': {'name': {[Op.or]: params.relationships}}}),'updateProduct': product.update({
+        'tags': Tags.bulkCreate(filteredData.tags),
+        'relationships': Relationships.bulkCreate(filteredData.relationships),
+        'updateProduct': product.update({
           'name': params.name,
           'visibility': params.visibility,
           'gender': params.gender,
@@ -94,9 +152,15 @@ module.exports = {
       }))
       .then((result) => {
         updateProduct = result.updateProduct;
+        return Promise.props({
+          'tags': Tags.findAll({'where': {'name': {[Op.or]: params.tags}}}),
+          'relationships': Relationships.findAll({'where': {'name': {[Op.or]: params.relationships}}})
+        })
+      })
+      .then((result) => {
         return Promise.all([
-          result.updateProduct.setTags(result.tags),
-          result.updateProduct.setRelationships(result.relationships)
+          updateProduct.setTags(result.tags),
+          updateProduct.setRelationships(result.relationships)
         ]);
       })
       .then(() => updateProduct);
@@ -110,7 +174,11 @@ module.exports = {
   },
   'fullRes': (product) => {
     const output = _.clone(productModel);
-    return new Promise((resolve) => {
+    return Promise.props({
+      'tags': product.getTags().then((tags) => _.map(tags, (tag) => (tag.name))),
+      'relationships': product.getRelationships().then((relationships) => _.map(relationships, (relationship) => (relationship.name)))
+    })
+    .then((result) => {
       output.id = product.id;
       output.name = product.name;
       output.createdDate = product.createdDate;
@@ -122,10 +190,12 @@ module.exports = {
       output.ages = product.ages;
       output.price = product.price;
       output.clicks = product.clicks;
+      output.tags = result.tags;
+      output.relationships = result.relationships;
       output.twitterShares = product.twitterShares;
       output.facebookShares = product.facebookShares;
       output.pinterestShares = product.pinterestShares;
-      return resolve(output);
+      return output;
     });
   }
 };

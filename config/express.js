@@ -30,6 +30,7 @@ module.exports = (app, cb) => {
     next(err);
   });
 
+
   // Error Response
   app.use((err, req, res, next) => {
     console.log(err);

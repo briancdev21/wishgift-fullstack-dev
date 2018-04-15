@@ -1,5 +1,3 @@
-import { xdescribe } from 'mocha';
-
 'use strict';
 
 const exceptions = require('../lib/exceptions');
@@ -25,7 +23,7 @@ module.exports = {
     logger.info('Searching Products');
     const limit = req.swagger.params.limit.value;
     const offset = req.swagger.params.offset.value;
-    const fields = req.swagger.params.field.value;
+    const fields = req.swagger.params.fields.value;
 
     const options = {
       'fields'     : fields,
@@ -34,16 +32,8 @@ module.exports = {
     };
     const parsedProducts = [];
     let searchResult;
-    return Products
-      .findOne(
-        {
-          'where'        : {'id': productId},
-          'rejectOnEmpty': true
-        }
-      )
-      .then(() =>
-        productService
-          .search(options))
+    return productService
+          .search(options)
       .then((result) => {
         searchResult = result;
         const promises = [];

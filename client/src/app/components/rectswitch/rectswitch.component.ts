@@ -12,7 +12,7 @@ export class RectswitchComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.gender == 'male') {
+    if (this.gender.toLowerCase() == 'male') {
       this.isMale = true;
     } else {
       this.isMale = false;
